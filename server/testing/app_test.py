@@ -46,6 +46,9 @@ class TestApp:
             db.session.add(signup)
             db.session.commit()
 
+            chosen_camper = Camper.query.filter(Camper.id == camper.id).first()
+            print(chosen_camper.to_dict())
+
             response = app.test_client().get(f'/campers/{camper.id}').json
             assert response['name'] == camper.name
             assert response['age'] == camper.age
